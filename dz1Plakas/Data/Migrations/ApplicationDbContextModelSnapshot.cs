@@ -261,6 +261,33 @@ namespace dz1Plakas.Data.Migrations
                     b.ToTable("carMark");
                 });
 
+            modelBuilder.Entity("dz1Plakas.Models.Page", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ing")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("seods")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("seokey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("pages");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)

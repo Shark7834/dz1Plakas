@@ -29,12 +29,14 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.name)
+                <span>@item.name</span>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.rgb)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.url)
+                <span>@item.url  </span>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

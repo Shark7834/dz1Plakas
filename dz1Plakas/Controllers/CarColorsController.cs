@@ -43,6 +43,19 @@ namespace dz1Plakas.Controllers
             return View(carColor);
         }
 
+        public async Task<IActionResult> Details(string name,string url)
+        {
+
+            var carColor = await _context.carColor
+                .FirstOrDefaultAsync(m => m.name == name && m.url == url);
+            if (carColor == null)
+            {
+                return NotFound();
+            }
+
+            return View(carColor);
+        }
+
         // GET: CarColors/Create
         public IActionResult Create()
         {

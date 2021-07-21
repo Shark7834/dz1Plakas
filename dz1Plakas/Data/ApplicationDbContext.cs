@@ -10,6 +10,8 @@ namespace dz1Plakas.Data
     {
         public DbSet<Models.CarColor> carColor { get; set; }
 
+        public DbSet<Models.Page> pages { get; set; }
+
         public DbSet<Models.CarMark> carMark { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

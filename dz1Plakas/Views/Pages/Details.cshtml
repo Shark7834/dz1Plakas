@@ -1,0 +1,39 @@
+﻿@model dz1Plakas.Models.Page
+
+@{
+    ViewData["Title"] = @Html.DisplayFor(model => model.title);
+    ViewData["SeoKey"] = @Html.DisplayFor(model => model.seokey);
+    ViewData["SeoDes"] = @Html.DisplayFor(model => model.seods);
+                    
+    Layout = "~/Views/Layouts/Front/Index.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Page</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.body)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.body)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ing)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ing)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
