@@ -1,0 +1,24 @@
+﻿@model dz1Plakas.Models.ContactForm
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Layouts/Front/Index.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>ContactForm</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        Спасибо за обращение!
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
