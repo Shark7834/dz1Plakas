@@ -14,7 +14,26 @@ namespace dz1Plakas.Data
         public DbSet<Models.ContactForm> contactForms { get; set; }
         public DbSet<Models.Brend> brends { get; set; }
         public DbSet<Models.Product> products { get; set; }
+        public DbSet<Models.Color> colors { get; set; }
+        public DbSet<Models.ColorProducts> colorProducts { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Models.ColorProducts>()
+                .HasKey(cp => new { cp.colorid,cp.productid });
+
+            modelBuilder.Entity<Models.ColorProducts>()
+                .HasOne<Models.Color>(cp => cp.color)
+                .WithMany(p => p.colorProducts)
+                .HasForeignKey(cp => cp.colorid);
+
+            modelBuilder.Entity<Models.ColorProducts>()
+               .HasOne<Models.Product>(cp => cp.product)
+               .WithMany(p => p.colorProducts)
+               .HasForeignKey(cp => cp.productid);
+
+        }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

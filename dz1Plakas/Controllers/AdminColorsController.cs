@@ -10,22 +10,22 @@ using dz1Plakas.Models;
 
 namespace dz1Plakas.Controllers
 {
-    public class AdminProductsController : Controller
+    public class AdminColorsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AdminProductsController(ApplicationDbContext context)
+        public AdminColorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: AdminProducts
+        // GET: AdminColors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.products.ToListAsync());
+            return View(await _context.colors.ToListAsync());
         }
 
-        // GET: AdminProducts/Details/5
+        // GET: AdminColors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,55 +33,39 @@ namespace dz1Plakas.Controllers
                 return NotFound();
             }
 
-            // var product = await _context.products
-            //    .FirstOrDefaultAsync(m => m.id == id);
-            Product product = _context.products
-                .Single(p => p.id == id);
-            _context.Entry(product).Reference(p => p.brend).Load();
-
-          
-
-            if (product == null)
+            var color = await _context.colors
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (color == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(color);
         }
 
-        // GET: AdminProducts/Create
+        // GET: AdminColors/Create
         public IActionResult Create()
-
         {
-            ViewBag.brends = _context.brends;
-            ViewBag.colors = _context.colors;
             return View();
         }
 
-        // POST: AdminProducts/Create
+        // POST: AdminColors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name")] Product product,
-            int brendid,
-            int?[] colorsid)
+        public async Task<IActionResult> Create([Bind("id,name")] Color color)
         {
             if (ModelState.IsValid)
             {
-                product.brend = _context.brends.Find(brendid);
-
-                _context.Add(product);
+                _context.Add(color);
                 await _context.SaveChangesAsync();
-
-                
-
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(color);
         }
 
-        // GET: AdminProducts/Edit/5
+        // GET: AdminColors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,22 +73,22 @@ namespace dz1Plakas.Controllers
                 return NotFound();
             }
 
-            var product = await _context.products.FindAsync(id);
-            if (product == null)
+            var color = await _context.colors.FindAsync(id);
+            if (color == null)
             {
                 return NotFound();
             }
-            return View(product);
+            return View(color);
         }
 
-        // POST: AdminProducts/Edit/5
+        // POST: AdminColors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("id,name")] Color color)
         {
-            if (id != product.id)
+            if (id != color.id)
             {
                 return NotFound();
             }
@@ -113,12 +97,12 @@ namespace dz1Plakas.Controllers
             {
                 try
                 {
-                    _context.Update(product);
+                    _context.Update(color);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.id))
+                    if (!ColorExists(color.id))
                     {
                         return NotFound();
                     }
@@ -129,10 +113,10 @@ namespace dz1Plakas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(color);
         }
 
-        // GET: AdminProducts/Delete/5
+        // GET: AdminColors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,30 +124,30 @@ namespace dz1Plakas.Controllers
                 return NotFound();
             }
 
-            var product = await _context.products
+            var color = await _context.colors
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (product == null)
+            if (color == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(color);
         }
 
-        // POST: AdminProducts/Delete/5
+        // POST: AdminColors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.products.FindAsync(id);
-            _context.products.Remove(product);
+            var color = await _context.colors.FindAsync(id);
+            _context.colors.Remove(color);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        private bool ColorExists(int id)
         {
-            return _context.products.Any(e => e.id == id);
+            return _context.colors.Any(e => e.id == id);
         }
     }
 }

@@ -5,18 +5,13 @@ using System.Threading.Tasks;
 
 namespace dz1Plakas.Models
 {
-    public class Product
+    public class Color
     {
         public int id { get; set; }
         public string name { get; set; }
 
-        public Brend brend { get; set; }
         public ICollection<ColorProducts> colorProducts { get; set; }
 
-        //public ICollection<Color> colors { get; set; }
-
-
-        // public int brendId { get; set; }
-
+        //public ICollection<Product> products { get; set; }
     }
 }
