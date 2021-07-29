@@ -69,6 +69,7 @@ namespace dz1Plakas.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 product.brend = _context.brends.Find(brendid);
 
                 _context.Add(product);
