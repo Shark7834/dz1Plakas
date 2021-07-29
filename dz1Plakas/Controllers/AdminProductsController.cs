@@ -33,8 +33,14 @@ namespace dz1Plakas.Controllers
                 return NotFound();
             }
 
-            var product = await _context.products
-                .FirstOrDefaultAsync(m => m.id == id);
+            // var product = await _context.products
+            //    .FirstOrDefaultAsync(m => m.id == id);
+            Product product = _context.products
+                .Single(p => p.id == id);
+            _context.Entry(product).Reference(p => p.brend).Load();
+
+          
+
             if (product == null)
             {
                 return NotFound();
@@ -45,7 +51,9 @@ namespace dz1Plakas.Controllers
 
         // GET: AdminProducts/Create
         public IActionResult Create()
+
         {
+            ViewBag.brends = _context.brends;
             return View();
         }
 
@@ -54,10 +62,11 @@ namespace dz1Plakas.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name")] Product product)
+        public async Task<IActionResult> Create([Bind("id,name")] Product product, int brendid)
         {
             if (ModelState.IsValid)
             {
+                product.brend = _context.brends.Find(brendid);
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

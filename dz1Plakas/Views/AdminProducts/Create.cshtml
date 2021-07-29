@@ -17,6 +17,18 @@
                 <input asp-for="name" class="form-control" />
                 <span asp-validation-for="name" class="text-danger"></span>
             </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Brend: </label>
+                <select class="form-control" name="brendid">
+                    @foreach (Brend brend in ViewBag.Brends)
+                    {
+                        <option value="@brend.id">@brend.name</option>
+                    }
+                </select>
+            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
