@@ -19,10 +19,40 @@ namespace dz1Plakas.Controllers
             _context = context;
         }
 
+        [Route("/MyWay")]
+        public string MyWay()
+        {
+            return "Hello Annotation";
+        }
+
+        [Route("/MyWay2")]
+        public async Task<IActionResult> MyWay2()
+        {
+            return  Content("Async Annotation");
+        }
+
+        [Route("/MyWay3")]
+        public IActionResult MyWay3()
+        {
+            return Content("Annotation3");
+        }
+
+
         // GET: AdminProducts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.products.ToListAsync());
+            
+            return View(await _context.products.Include(p=>p.brend).ToListAsync());
+        }
+
+        public async Task<IActionResult> byBrend(String name,int id)
+        {
+
+            return View(await _context.products
+                .Where(p => p.brend.id == id)
+                .Include(p => p.brend)
+                .ToListAsync());
+            
         }
 
         // GET: AdminProducts/Details/5

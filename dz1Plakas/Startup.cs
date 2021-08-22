@@ -1,6 +1,7 @@
 using dz1Plakas.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace dz1Plakas
 {
@@ -63,8 +64,20 @@ namespace dz1Plakas
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                   endpoints.MapGet("/path",async context => {
+                   await context.Response.WriteAsync("Hello Path");
+                   });
+
+                endpoints.MapControllerRoute(
+                    name:"sortProduct",
+                    pattern:"{name}/show/byBrend/p-{id}",
+                    defaults: new { controller = "AdminProducts",action ="ByBrend"}
+                    );
                 endpoints.MapRazorPages();
-            });
+             
+            }  
+            
+            );
         }
     }
 }

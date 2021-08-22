@@ -24,10 +24,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.name)
                 <br />
-               Brend:
-                <a href ="/@Html.DisplayFor(modelItem => item.brend.name)/show/byBrend/p-@Html.DisplayFor(modelItem => item.brend.id)">
-                @Html.DisplayFor(modelItem => item.brend.name)
-                    </a>
+               Brend: @Html.DisplayFor(modelItem => item.brend.name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
